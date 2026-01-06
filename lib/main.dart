@@ -149,6 +149,6 @@ class ImageSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(image, width: 600, height: 240, fit: BoxFit.cover);
+    return Image.asset(image, width: 700, height: 240, fit: BoxFit.cover);
   }
 }
