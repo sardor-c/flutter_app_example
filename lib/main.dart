@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/example1.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(const ExampleApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -16,13 +17,10 @@ class MyApp extends StatelessWidget {
         body: const SingleChildScrollView(
           child: Column(
             children: [
-              ImageSection(
-                image: 'images/lake.png',
-              ),
+              ImageSection(image: 'images/lake.png'),
               TitleSection(
                 name: 'Oeschinen Lake Campground',
-                location:
-                    'Kandersteg Switzerland',
+                location: 'Kandersteg Switzerland',
               ),
               ButtonSection(),
               TextSection(
@@ -47,12 +45,10 @@ class FavoriteWidget extends StatefulWidget {
   const FavoriteWidget({super.key});
 
   @override
-  State<FavoriteWidget> createState() =>
-      _FavoriteWidgetState();
+  State<FavoriteWidget> createState() => _FavoriteWidgetState();
 }
 
-class _FavoriteWidgetState
-    extends State<FavoriteWidget> {
+class _FavoriteWidgetState extends State<FavoriteWidget> {
   bool _isFavorited = true;
   int _favoriteCount = 41;
 
@@ -75,9 +71,7 @@ class _FavoriteWidgetState
         ),
         SizedBox(
           width: 18,
-          child: SizedBox(
-            child: Text('$_favoriteCount'),
-          ),
+          child: SizedBox(child: Text('$_favoriteCount')),
         ),
       ],
     );
@@ -113,13 +107,10 @@ class TitleSection extends StatelessWidget {
         children: [
           Expanded(
             child: Column(
-              crossAxisAlignment:
-                  CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(
-                    bottom: 8,
-                  ),
+                  padding: const EdgeInsets.only(bottom: 8),
                   child: Text(
                     name,
                     style: const TextStyle(
@@ -129,9 +120,7 @@ class TitleSection extends StatelessWidget {
                 ),
                 Text(
                   location,
-                  style: TextStyle(
-                    color: Colors.grey[500],
-                  ),
+                  style: TextStyle(color: Colors.grey[500]),
                 ),
               ],
             ),
@@ -148,13 +137,10 @@ class ButtonSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color color = Theme.of(
-      context,
-    ).primaryColor;
+    final Color color = Theme.of(context).primaryColor;
     return SizedBox(
       child: Row(
-        mainAxisAlignment:
-            MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           ButtonWithText(
             color: color,
@@ -213,10 +199,7 @@ class ButtonWithText extends StatelessWidget {
 }
 
 class TextSection extends StatelessWidget {
-  const TextSection({
-    super.key,
-    required this.descritption,
-  });
+  const TextSection({super.key, required this.descritption});
 
   final String descritption;
 
@@ -234,10 +217,7 @@ class TextSection extends StatelessWidget {
 }
 
 class ImageSection extends StatelessWidget {
-  const ImageSection({
-    super.key,
-    required this.image,
-  });
+  const ImageSection({super.key, required this.image});
 
   final String image;
 
