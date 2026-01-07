@@ -16,10 +16,13 @@ class MyApp extends StatelessWidget {
         body: const SingleChildScrollView(
           child: Column(
             children: [
-              ImageSection(image: 'images/lake.png'),
+              ImageSection(
+                image: 'images/lake.png',
+              ),
               TitleSection(
                 name: 'Oeschinen Lake Campground',
-                location: 'Kandersteg Switzerland',
+                location:
+                    'Kandersteg Switzerland',
               ),
               ButtonSection(),
               TextSection(
@@ -40,11 +43,68 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class FavoriteWidget extends StatefulWidget {
+  const FavoriteWidget({super.key});
+
+  @override
+  State<FavoriteWidget> createState() =>
+      _FavoriteWidgetState();
+}
+
+class _FavoriteWidgetState
+    extends State<FavoriteWidget> {
+  bool _isFavorited = true;
+  int _favoriteCount = 41;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          padding: EdgeInsets.all(0),
+          child: IconButton(
+            color: Colors.red[500],
+            padding: EdgeInsets.all(0),
+            alignment: Alignment.center,
+            icon: (_isFavorited
+                ? const Icon(Icons.star)
+                : const Icon(Icons.star_border)),
+            onPressed: _toggleFavorite,
+          ),
+        ),
+        SizedBox(
+          width: 18,
+          child: SizedBox(
+            child: Text('$_favoriteCount'),
+          ),
+        ),
+      ],
+    );
+  }
+
+  void _toggleFavorite() {
+    setState(() {
+      if (_isFavorited) {
+        _favoriteCount -= 1;
+        _isFavorited = false;
+      } else {
+        _favoriteCount += 1;
+        _isFavorited = true;
+      }
+    });
+  }
+}
+
 class TitleSection extends StatelessWidget {
   final String name;
   final String location;
 
-  const TitleSection({super.key, required this.name, required this.location});
+  const TitleSection({
+    super.key,
+    required this.name,
+    required this.location,
+  });
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -53,21 +113,30 @@ class TitleSection extends StatelessWidget {
         children: [
           Expanded(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment:
+                  CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
+                  padding: const EdgeInsets.only(
+                    bottom: 8,
+                  ),
                   child: Text(
                     name,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-                Text(location, style: TextStyle(color: Colors.grey[500])),
+                Text(
+                  location,
+                  style: TextStyle(
+                    color: Colors.grey[500],
+                  ),
+                ),
               ],
             ),
           ),
-          Icon(Icons.star, color: Colors.red[500]),
-          const Text('41'),
+          const FavoriteWidget(),
         ],
       ),
     );
@@ -79,14 +148,29 @@ class ButtonSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color color = Theme.of(context).primaryColor;
+    final Color color = Theme.of(
+      context,
+    ).primaryColor;
     return SizedBox(
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment:
+            MainAxisAlignment.spaceEvenly,
         children: [
-          ButtonWithText(color: color, icon: Icons.call, label: 'CALL'),
-          ButtonWithText(color: color, icon: Icons.near_me, label: 'ROUTE'),
-          ButtonWithText(color: color, icon: Icons.share, label: 'SHARE'),
+          ButtonWithText(
+            color: color,
+            icon: Icons.call,
+            label: 'CALL',
+          ),
+          ButtonWithText(
+            color: color,
+            icon: Icons.near_me,
+            label: 'ROUTE',
+          ),
+          ButtonWithText(
+            color: color,
+            icon: Icons.share,
+            label: 'SHARE',
+          ),
         ],
       ),
     );
@@ -129,7 +213,10 @@ class ButtonWithText extends StatelessWidget {
 }
 
 class TextSection extends StatelessWidget {
-  const TextSection({super.key, required this.descritption});
+  const TextSection({
+    super.key,
+    required this.descritption,
+  });
 
   final String descritption;
 
@@ -137,18 +224,30 @@ class TextSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(32),
-      child: Text(descritption, softWrap: true, textAlign: TextAlign.justify),
+      child: Text(
+        descritption,
+        softWrap: true,
+        textAlign: TextAlign.justify,
+      ),
     );
   }
 }
 
 class ImageSection extends StatelessWidget {
-  const ImageSection({super.key, required this.image});
+  const ImageSection({
+    super.key,
+    required this.image,
+  });
 
   final String image;
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(image, width: 700, height: 240, fit: BoxFit.cover);
+    return Image.asset(
+      image,
+      width: 700,
+      height: 240,
+      fit: BoxFit.cover,
+    );
   }
 }
